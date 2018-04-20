@@ -3,6 +3,8 @@ package com.niit.skillMap.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +20,7 @@ import com.niit.skillMap.model.EmployeeRepository;
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	List<String> errorList=new ArrayList<>();
     public RegisterController() {
     }
 
@@ -29,6 +31,7 @@ public class RegisterController extends HttpServlet {
 		String employeePhone=request.getParameter("phone");
 		String employeeCity=request.getParameter("city");
 		String employeePassword=request.getParameter("password");
+		String role = request.getParameter("role");
 		
 		Employee employee=new Employee();
 		employee.setEmployee_id(employeeId);
@@ -37,32 +40,40 @@ public class RegisterController extends HttpServlet {
 		employee.setContact_no(employeePhone);
 		employee.setAddress(employeeCity);
 		employee.setPassword(employeePassword);
+		employee.setDesignation(role);
 		employee.setStatus(false);
-		
+		errorList=employee.getMap();
+		System.out.println("Error ----"+errorList);
 		EmployeeRepository repository=new EmployeeRepository();
 		boolean status=false;
 		try {
+			if(errorList.size()==0)
+			{
 			status = repository.insertRecords(employee);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(status)
 		{
 			request.setAttribute("invalid", "Successfully registered Try to login");
-			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/reg");
 			requestDispatcher.include(request, response);
+		}
+		else
+		{
+			request.setAttribute("error", errorList);
+			request.setAttribute("employee", employee);
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/reg");
+			requestDispatcher.forward(request, response);
 		}
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("error", errorList);
+		
 		RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/register.jsp");
 		requestDispatcher.include(request, response);
 	}

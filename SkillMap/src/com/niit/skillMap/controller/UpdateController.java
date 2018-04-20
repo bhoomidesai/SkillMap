@@ -31,8 +31,9 @@ public class UpdateController extends HttpServlet {
 		String employeeCertification=request.getParameter("certification");
 		String business_unit=request.getParameter("bu");
 		int centreCode=Integer.parseInt(request.getParameter("centercode"));
-		String designation = request.getParameter("designation");
+		String designation = request.getParameter("role");
 		String plComp = request.getParameter("plcomp");
+		System.out.println("role : "+designation);
 		int per = Integer.parseInt(request.getParameter("per"));
 		int rate =  Integer.parseInt(request.getParameter("rate"));
 		int total_hour_tought=Integer.parseInt(request.getParameter("tht"));
@@ -57,11 +58,10 @@ public class UpdateController extends HttpServlet {
 		employee.setQualification(employeeQualification);
 		employee.setSkills(employeeSkill);
 		employee.setCertifications(employeeCertification);
-		employee.setBusiness_unit(business_unit);
 		employee.setCentre_Code(centreCode);
 		employee.setDesignation(designation);
 		employee.setEmployee_DOJ(doj);
-		
+		employee.setBusiness_unit("CEB");
 		employee.setPlacement_companies(plComp);
 		employee.setPlacement_per(per);
 		employee.setRating(rate);

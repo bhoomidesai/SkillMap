@@ -16,7 +16,7 @@
     </div>
     <ul class="nav navbar-nav">
         <li><a href="/SkillMap/WebContent/WEB-INF/views/index.jsp"><span class="glyphicon glyphicon-home"><b>&nbsp;Home</b></span></a>
-      <li><a href="SkillMap/WebContent/WEB-INF/views/admin.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;Admin</a></li>
+      <li><a href="/SkillMap/hr"><span class="glyphicon glyphicon-user"></span>&nbsp;HR</a></li>
       <li><a href="SkillMap/WebContent/WEB-INF/views/result.jsp"><i style="font-size:24px" class="fa">&#xf0f6;</i>&nbsp;Result</a></li>
       <li><a href="SkillMap/WebContent/WEB-INF/views/jobs.jsp"><i style="font-size:24px" class="fa">&#xf0f6;</i>&nbsp;Jobs</a></li>
       <li><a href="SkillMap/WebContent/WEB-INF/views/media.jsp"><i style="font-size:24px" class="fa">&#xf0f6;</i>&nbsp;Media</a></li>

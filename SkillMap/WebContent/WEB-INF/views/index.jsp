@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/views/Header.jsp"/>
 
 <div class="col-md-7 col-sm-6 highlight">
@@ -9,38 +11,40 @@
 	<div ></div>
 	
         </div>	
-		
+		<form action="search">
     <div  style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
-
-		<!-- Indicators -->
-		
-		<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
-				<img src="images/1.jpg" alt="Vote1"
-					style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
-			</div>
-
-			<div class="item active">
-				<img src="images/2.jpg" alt="Chania"
-					style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
-			</div>
-			<div class="item">
-				<img src="images/3.jpg" alt="Chania"
-					style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
-			</div>
-
-			<div class="item">
-				<img src="images/1.jpg" alt="Flower"
-					style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
-			</div>
-
-		</div>
-
-		<!-- Left and right controls -->
+	 <div class="form-group">
+    <label for="cno">Search :</label>
+    <input id="word" name="word"  class="form-control input-md"  type="text">
+  </div>
+  <div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"> </label>
+  <div class="col-md-4">
+    <input type="submit" name="submit" value="Search" class="btn btn-success">Search
+    <b>User Data : </b>
+		</h2>
 		
 	</div>
+	</form>
+	<br />
+	<table border=1>
+	<tr><th>Id:</th> <th>Name:</th> <th>Email:</th> <th>Phone:</th><th>City:</th>
+	<th>Status:</th> <th>Skill Set:</th> <th>Certification:</th> <th>Pending Action:</th></tr>
+	 <c:forEach var="employee" items="${requestScope.employeeList}" varStatus="status">
+	<tr>
+		<td>${employee.employee_id}</td>
+		<td>${employee.employee_name}</td>
+		<td>${employee.employee_email}</td>
+		<td>${employee.contact_no}</td>
+		<td>${employee.address}</td>
+		<td>${employee.status}</td>
+		<td>${employee.skills}</td>
+		<td>${employee.certifications}</td>
+		<td><a href="approve?employee_id=${employee.employee_id}">Approve</a></td>
+	</c:forEach>
+	</table>
+  </div>
+</div>
 
 </div>
 				
@@ -77,6 +81,7 @@
                                                       <div class="col-sm-offset-2 col-sm-10">
                                                         <h5><a>Forget password...!</a></h5>
                                                        <h5> <a href="reg" >Register</a>
+                                                       <h5> <a href="hr" >HR</a>
                                                      </h5> </div>
                                                     </div>
                                                     <div class="form-group"> 

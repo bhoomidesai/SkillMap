@@ -16,7 +16,7 @@
 	<th>Edit</th>
 	
 	<tr>
-	<td>${requestScope.employee.employee_id}</td>
+	<td>${employee.employee_id}</td>
 	<td>${requestScope.employee.employee_name}</td>
 	<td>${requestScope.employee.employee_email}</td>
 	<td>${requestScope.employee.contact_no}</td>

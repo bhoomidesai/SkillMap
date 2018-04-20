@@ -27,7 +27,15 @@
     <label for="pno">Contact No. :</label>
     <input id="textinput" name="phone" value="${requestScope.employee.contact_no}" class="form-control input-md" required="" type="text">
   </div>
-    
+    <div class="form-group">
+    <label for="pno">Role :</label>
+    <div class="radio">
+  <label><input type="radio" name="role" value = "hr">HR</label>
+  <label><input type="radio" name="role" value = "employee">Employee</label>
+  <label><input type="radio" name="role" value = "employer">Employer</label>
+  
+</div>
+</div>
     <div class="form-group">
     <label for="cno">Address :</label>
     <input id="city" name="city" value="${requestScope.employee.address}" class="form-control input-md" required="true" type="text">

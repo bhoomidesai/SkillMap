@@ -1,8 +1,8 @@
 package com.niit.skillMap.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,13 +36,19 @@ public class Employee
 	}
 	private  Pattern emailNamePtrn = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	private  Pattern contactptrn = Pattern.compile("^[0-9]{10}$");
-	public Map validator = new HashMap<String,String>();
+	List<String>  errorMap=new ArrayList<>();
 	
 	public int getEmployee_id() {
 		return employee_id;
 	}
 	public void setEmployee_id(int employee_id) {
+		if(employee_id>0)
+		{
 		this.employee_id = employee_id;
+		}else
+		{
+			errorMap.add("Id Cannot be left Blank");
+		}
 	}
 	public String getEmployee_email() {
 		return employee_email;
@@ -54,7 +60,7 @@ public class Employee
 		}
 		else
 		{
-			validator.put("errMail", "Invalid email");
+			errorMap.add("Invalid | Email Cannot be left Blank");
 		}
 		
 	}
@@ -62,43 +68,95 @@ public class Employee
 		return employee_name;
 	}
 	public void setEmployee_name(String employee_name) {
-		this.employee_name = employee_name;
+		if(!employee_name.isEmpty())
+		{
+			this.employee_name = employee_name;
+		}else
+		{
+			errorMap.add("name Cannot be left Blank");
+		}
+		
 	}
 	public String getQualification() {
 		return qualification;
 	}
 	public void setQualification(String qualification) {
-		this.qualification = qualification;
+		if(!qualification.isEmpty())
+		{
+			this.qualification = qualification;
+		}else
+		{
+			errorMap.add("qualification Cannot be left Blank");
+		}
+		
+		
 	}
 	public Date getEmployee_DOJ() {
 		return employee_DOJ;
 	}
 	public void setEmployee_DOJ(Date employee_DOJ) {
-		this.employee_DOJ = employee_DOJ;
+		if(!employee_DOJ.equals(null))
+		{
+			this.employee_DOJ = employee_DOJ;
+		}else
+		{
+			errorMap.add("Date of Joining Cannot be left Blank");
+		}
+		
 	}
 	public String getBusiness_unit() {
 		return business_unit;
 	}
 	public void setBusiness_unit(String business_unit) {
-		this.business_unit = business_unit;
+		if(business_unit.isEmpty())
+		{
+			this.business_unit = business_unit;
+		}else
+		{
+			errorMap.add("business unit Cannot be left Blank");
+		}
+		
 	}
 	public String getDesignation() {
 		return designation;
 	}
 	public void setDesignation(String designation) {
-		this.designation = designation;
+		if(designation.isEmpty())
+		{errorMap.add("designation Cannot be left Blank");
+			
+		}else
+		{
+			
+			this.designation = designation;
+		}
+		
 	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
-		this.address = address;
+		if(address.isEmpty())
+		{
+			
+			errorMap.add("address Cannot be left Blank");
+		}else
+		{
+			this.address = address;
+		}
+		
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		if(password.isEmpty())
+		{errorMap.add("password Cannot be left Blank");
+			
+		}else
+		{this.password = password;
+			
+		}
+		
 	}
 	public String getContact_no() {
 		return contact_no;
@@ -110,7 +168,7 @@ public class Employee
 			this.contact_no = contact_no;
 		}else
 		{
-			validator.put("errContact", "Contact no should be 10 in numeric digits");
+			errorMap.add( "Contact no should be 10 in numeric digits");
 		}
 		
 	}
@@ -161,6 +219,10 @@ public class Employee
 	}
 	public void setCertifications(String certifications) {
 		this.certifications = certifications;
+	}
+	public List<String> getMap() {
+		// TODO Auto-generated method stub
+		return this.errorMap;
 	}
 	
 
