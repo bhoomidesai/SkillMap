@@ -18,7 +18,7 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="/SkillMap/WebContent/WEB-INF/images/1.jpg" alt="Vote1"
+				<img src="images/1.jpg" alt="Vote1"
 					style="height: 350px; width: 100%; overflow: hidden; cursor: pointer">
 			</div>
 
@@ -76,7 +76,8 @@
                                                     <div class="form-group"> 
                                                       <div class="col-sm-offset-2 col-sm-10">
                                                         <h5><a>Forget password...!</a></h5>
-                                                      </div>
+                                                       <h5> <a href="reg" >Register</a>
+                                                     </h5> </div>
                                                     </div>
                                                     <div class="form-group"> 
                                                       <div class="col-sm-offset-2 col-sm-10">

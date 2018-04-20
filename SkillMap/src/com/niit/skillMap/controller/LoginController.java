@@ -22,23 +22,32 @@ public class LoginController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		PrintWriter out=response.getWriter();
-		String employeeEmail=request.getParameter("eid");
+		int eid=Integer.parseInt(request.getParameter("eid"));
 		String employeePassword=request.getParameter("password");
-		System.out.println("in login");
+		
 		EmployeeRepository repository = new EmployeeRepository();
-		int count = repository.validateEmployee(employeeEmail,employeePassword);
+		int count = repository.validateEmployee(eid,employeePassword);
 		if(count>0)
 		{
-			Employee employee=repository.getByEmail(employeeEmail);
+			Employee employee = new Employee();
+			try {
+				employee = repository.getById(eid);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			request.setAttribute("employee", employee);
+			System.out.println("ename : "+employee.getEmployee_name());
 			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/home.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		else
 		{
 			out.println("Wrong Username or Password try to login again");
+			request.setAttribute("invalid", "Wrong Username or Password try to login again");
 			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-			requestDispatcher.include(request, response);
+			requestDispatcher.forward(request, response);
 		}
 			
 		

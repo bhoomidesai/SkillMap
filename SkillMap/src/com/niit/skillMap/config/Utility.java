@@ -32,7 +32,7 @@ public class Utility
 			 //class not found exception
 			Class.forName(driverClass);
 			System.out.println("Connection Not Established yet "+driverClass);
-			con = DriverManager.getConnection(url, userName, password);
+			con = DriverManager.getConnection("jdbc:h2:~/niitSkillMap", "sa", "");
 			
 			System.out.println("Connection Established");
 			
@@ -51,16 +51,17 @@ public class Utility
 		} 
 		return con;
 	}
-	/*public static void main(String a[])
+	public static void main(String a[])
 	{
 		System.out.println("begin");
-		Utility.createConnection();
+		Utility u = new Utility();
+		u.createConnection();
 		try {
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 }

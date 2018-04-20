@@ -21,9 +21,10 @@ public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String id = request.getParameter("employeeId");
-	        int employeeId = Integer.parseInt(id);
-	        Employee employee = null;
+		System.out.println("id : "+request.getParameter("employee_id"));
+	        int employeeId = Integer.parseInt(request.getParameter("employee_id"));
+	        Employee employee = new Employee();
+	        System.out.println("id : "+request.getParameter("employee_id"));
 			try {
 				employee = new EmployeeRepository().getById(employeeId);
 			} catch (Exception e) {

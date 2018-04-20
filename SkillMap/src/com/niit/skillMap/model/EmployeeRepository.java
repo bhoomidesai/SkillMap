@@ -71,7 +71,7 @@ public class EmployeeRepository
 		
 		PreparedStatement ps = con.prepareStatement("update Employee set 	"
 				+ "EMPLOYEE_EMAIL =?, 	EMPLOYEE_NAME  =?, 	QUALIFICATION  =?, 	EMPLOYEE_DOJ  =?, 	"
-				+ "BUSINESS_UNIT   =?,	DESIGNATION   =?,	ADDRESS   =?,	PASSWORD  =?, 	CONTACT_NO   =?,	"
+				+ "BUSINESS_UNIT   =?,	DESIGNATION   =?,	ADDRESS   =?, 	CONTACT_NO   =?,	"
 				+ "CENTRE_CODE   =?,	RATING   =?,	TOTAL_STUDENT_TOUGHT   =?,	TOTAL_HOURS_TOUGHT   =?,	"
 				+ "PLACEMENT_PER  =?, 	SKILLS   =?,	PLACEMENT_COMPANIES  =?, 	CERTIFICATIONS =? where employee_id = ?  ");
 		// accept data
@@ -84,17 +84,17 @@ public class EmployeeRepository
 		ps.setString(5,employee.getBusiness_unit());
 		ps.setString(6, employee.getDesignation());
 		ps.setString(7, employee.getAddress());
-		ps.setString(8, employee.getPassword());
-		ps.setString(9, employee.getContact_no());		
-		ps.setInt(10, employee.getCentre_Code());
-		ps.setInt(11, employee.getRating());
-		ps.setInt(12, employee.getTotal_student_tought());
-		ps.setInt(13, employee.getTotal_hours_tought());
-		ps.setFloat(14, employee.getPlacement_per());
-		ps.setString(15, employee.getSkills());
-		ps.setString(16, employee.getPlacement_companies());
-		ps.setString(17, employee.getCertifications());
-		ps.setInt(18, eid);
+		
+		ps.setString(8, employee.getContact_no());		
+		ps.setInt(9, employee.getCentre_Code());
+		ps.setInt(10, employee.getRating());
+		ps.setInt(11, employee.getTotal_student_tought());
+		ps.setInt(12, employee.getTotal_hours_tought());
+		ps.setFloat(13, employee.getPlacement_per());
+		ps.setString(14, employee.getSkills());
+		ps.setString(15, employee.getPlacement_companies());
+		ps.setString(16, employee.getCertifications());
+		ps.setInt(17, eid);
 
 		int x = ps.executeUpdate();
 		con.close();
@@ -123,21 +123,67 @@ public class EmployeeRepository
 	}
 	public Employee getById(int eid) throws Exception
 	{
-		Employee employee;
+		Employee employee = new Employee();
 		PreparedStatement ps = con.prepareStatement("Select * from employee where employee_id = ?  ");
 		ps.setInt(1, eid);
-		employee = (Employee) ps.executeQuery();
+		ResultSet rs =  ps.executeQuery();
+		System.out.println("before cnvrt");
+		while(rs.next())
+		{
+			employee.setEmployee_id(rs.getInt("employee_id"));	
+			employee.setEmployee_email(rs.getString("employee_email"));	
+			employee.setEmployee_name(rs.getString("employee_name"));
+			System.out.println("repo : "+rs.getString("employee_name"));
+			employee.setQualification(rs.getString("qualification"));	
+			employee.setEmployee_DOJ(rs.getDate("employee_DOJ"));
+			employee.setBusiness_unit(rs.getString("business_unit"));
+			employee.setDesignation(rs.getString("designation"));
+			employee.setAddress(rs.getString("address"));
+			employee.setContact_no(rs.getString("contact_no"));
+			employee.setCentre_Code(rs.getInt("centre_Code"));
+			employee.setRating(rs.getInt("rating"));
+			employee.setTotal_student_tought(rs.getInt("total_student_tought"));
+			employee.setTotal_hours_tought(rs.getInt("total_hours_tought"));
+			employee.setSkills(rs.getString("skills"));
+			employee.setPlacement_companies(rs.getString("placement_companies"));
+			employee.setCertifications(rs.getString("certifications"));
+			
+		}
 		return employee;
 		
 	}
 	public Employee getByEmail(String email)
 	{
-		Employee employee = null;
+		Employee employee = new Employee();
 		
 		try {
 			PreparedStatement ps = con.prepareStatement("Select * from employee where employee_email = ?  ");
 			ps.setString(1, email);
-			employee = (Employee) ps.executeQuery();
+			ResultSet rs =  ps.executeQuery();
+			System.out.println("before cnvrt");
+			while(rs.next())
+			{
+				employee.setEmployee_id(rs.getInt("employee_id"));
+				employee.setEmployee_email(rs.getString("employee_email"));	
+				employee.setEmployee_name(rs.getString("employee_name"));
+				System.out.println("repo : "+rs.getString("employee_name"));
+				employee.setQualification(rs.getString("qualification"));	
+				employee.setEmployee_DOJ(rs.getDate("employee_DOJ"));
+				employee.setBusiness_unit(rs.getString("business_unit"));
+				employee.setDesignation(rs.getString("designation"));
+				employee.setAddress(rs.getString("address"));
+				employee.setContact_no(rs.getString("contact_no"));
+				employee.setCentre_Code(rs.getInt("centre_Code"));
+				employee.setRating(rs.getInt("rating"));
+				employee.setTotal_student_tought(rs.getInt("total_student_tought"));
+				employee.setTotal_hours_tought(rs.getInt("total_hours_tought"));
+				employee.setSkills(rs.getString("skills"));
+				employee.setPlacement_companies(rs.getString("placement_companies"));
+				employee.setCertifications(rs.getString("certifications"));
+				
+			}
+			
+			System.out.println("afetr cnvrt");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,17 +192,18 @@ public class EmployeeRepository
 		return employee;
 		
 	}
-	public int validateEmployee (String eid,String password)
+	public int validateEmployee (int eid,String password)
 	{
 		Employee employee;
 		int count=0;
-		try {System.out.println("--->"+Integer.parseInt(eid));
+		try {
 			st = con.createStatement();
 			
-			
-			
-			ResultSet resultSet=ps.executeQuery("select * from employee where employee_id="+Integer.parseInt(eid)+" and password='"+password+"'");
-			while(resultSet.next())
+			PreparedStatement ps = con.prepareStatement("select * from employee where employee_id=? and password=?");
+			ps.setInt(1, eid);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
 				count++;
 			
 		} catch (SQLException e) {

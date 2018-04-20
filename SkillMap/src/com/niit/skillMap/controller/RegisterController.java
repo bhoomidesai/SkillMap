@@ -55,8 +55,8 @@ public class RegisterController extends HttpServlet {
 		}
 		if(status)
 		{
-			response.getWriter().println("Successfully registered Try to login");
-			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+			request.setAttribute("invalid", "Successfully registered Try to login");
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/index.jsp");
 			requestDispatcher.include(request, response);
 		}
 	}
