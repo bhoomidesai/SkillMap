@@ -1,4 +1,4 @@
-package com.niit.skillMap.controller;
+/*package com.niit.skillMap.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,11 +20,13 @@ import com.niit.skillMap.model.EmployeeRepository;
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	List<String> errorList=new ArrayList<>();
+	
     public RegisterController() {
     }
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	List<String> errorList=new ArrayList<>();
 		int employeeId=Integer.parseInt(request.getParameter("eid"));
 		String employeeName=request.getParameter("name");
 		String employeeEmail=request.getParameter("email");
@@ -43,7 +45,6 @@ public class RegisterController extends HttpServlet {
 		employee.setDesignation(role);
 		employee.setStatus(false);
 		errorList=employee.getMap();
-		System.out.println("Error ----"+errorList);
 		EmployeeRepository repository=new EmployeeRepository();
 		boolean status=false;
 		try {
@@ -70,12 +71,9 @@ public class RegisterController extends HttpServlet {
 		}
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("error", errorList);
-		
-		RequestDispatcher requestDispatcher=request.getRequestDispatcher("/WEB-INF/views/register.jsp");
-		requestDispatcher.include(request, response);
+	
+	
 	}
 
-}
+
+*/

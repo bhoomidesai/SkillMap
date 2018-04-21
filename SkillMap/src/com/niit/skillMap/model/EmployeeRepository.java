@@ -130,16 +130,14 @@ public class EmployeeRepository
 		PreparedStatement ps = con.prepareStatement("Select * from employee where employee_id = ?  ");
 		ps.setInt(1, eid);
 		ResultSet rs =  ps.executeQuery();
-		System.out.println("before cnvrt");
 		while(rs.next())
 		{
 			employee.setEmployee_id(rs.getInt("employee_id"));	
 			employee.setEmployee_email(rs.getString("employee_email"));	
 			employee.setEmployee_name(rs.getString("employee_name"));
-			System.out.println("repo : "+rs.getString("employee_name"));
 			employee.setQualification(rs.getString("qualification"));	
 			employee.setEmployee_DOJ(rs.getDate("employee_DOJ"));
-			employee.setBusiness_unit(rs.getString("business_unit"));
+
 			employee.setDesignation(rs.getString("designation"));
 			employee.setAddress(rs.getString("address"));
 			employee.setContact_no(rs.getString("contact_no"));
@@ -163,13 +161,11 @@ public class EmployeeRepository
 			PreparedStatement ps = con.prepareStatement("Select * from employee where employee_email = ?  ");
 			ps.setString(1, email);
 			ResultSet rs =  ps.executeQuery();
-			System.out.println("before cnvrt");
 			while(rs.next())
 			{
 				employee.setEmployee_id(rs.getInt("employee_id"));
 				employee.setEmployee_email(rs.getString("employee_email"));	
 				employee.setEmployee_name(rs.getString("employee_name"));
-				System.out.println("repo : "+rs.getString("employee_name"));
 				employee.setQualification(rs.getString("qualification"));	
 				employee.setEmployee_DOJ(rs.getDate("employee_DOJ"));
 				employee.setBusiness_unit(rs.getString("business_unit"));
@@ -226,7 +222,6 @@ public class EmployeeRepository
 		while(rs.next())
 		{
 			employee.setEmployee_id(rs.getInt("employee_id"));
-			System.out.println("name : "+rs.getString("employee_name"));
 			employee.setEmployee_name(rs.getString("employee_name"));
 			employee.setEmployee_email(rs.getString("employee_email"));	
 			employee.setQualification(rs.getString("qualification"));	
@@ -261,12 +256,10 @@ public class EmployeeRepository
 		while(rs.next())
 		{
 			employee.setEmployee_id(rs.getInt("employee_id"));
-			System.out.println("name : "+rs.getString("employee_name"));
 			employee.setEmployee_name(rs.getString("employee_name"));
 			employee.setEmployee_email(rs.getString("employee_email"));	
 			employee.setQualification(rs.getString("qualification"));	
 			employee.setEmployee_DOJ(rs.getDate("employee_DOJ"));
-
 			employee.setStatus(rs.getBoolean("status"));
 			employee.setAddress(rs.getString("address"));
 			employee.setContact_no(rs.getString("contact_no"));

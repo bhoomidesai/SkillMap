@@ -14,7 +14,7 @@ public class Utility
 	private static String driverClass=null;
 	private static String url=null;
 	
-	public Connection createConnection()
+	public static Connection createConnection()
 	{
 		try {
 				
@@ -32,7 +32,7 @@ public class Utility
 			 //class not found exception
 			Class.forName(driverClass);
 			System.out.println("Connection Not Established yet "+driverClass);
-			con = DriverManager.getConnection("jdbc:h2:~/niitSkillMap", "sa", "");
+			con = DriverManager.getConnection(url, userName, "");
 			
 			System.out.println("Connection Established");
 			

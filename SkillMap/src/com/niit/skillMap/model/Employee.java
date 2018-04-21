@@ -108,7 +108,7 @@ public class Employee
 		return business_unit;
 	}
 	public void setBusiness_unit(String business_unit) {
-		if(business_unit.isEmpty())
+		if(business_unit.isEmpty() || business_unit.equals(null))
 		{
 			this.business_unit = business_unit;
 		}else

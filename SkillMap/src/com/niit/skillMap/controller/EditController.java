@@ -1,4 +1,4 @@
-package com.niit.skillMap.controller;
+/*package com.niit.skillMap.controller;
 
 
 import java.io.IOException;
@@ -38,3 +38,4 @@ public class EditController extends HttpServlet {
 	}
 
 }
+*/

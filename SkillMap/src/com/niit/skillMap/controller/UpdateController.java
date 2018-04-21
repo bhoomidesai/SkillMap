@@ -1,4 +1,4 @@
-package com.niit.skillMap.controller;
+/*package com.niit.skillMap.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -88,3 +88,4 @@ public class UpdateController extends HttpServlet {
 	}
 
 }
+*/
