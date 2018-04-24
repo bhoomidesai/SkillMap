@@ -13,35 +13,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDAO employeeDAO;
 
-	public List<Employee> getAllService() {
-		return employeeDAO.getAll();
-	}
-
-	public boolean insertService(Employee employee) {
-		if (employeeDAO.getById(employee.getEmployee_id()) != null) {
+	public boolean insertEmployee(Employee employee) {
+		if (employeeDAO.getEmployeeById(employee.getEmployee_id()) != null) {
 			return false;
 		} else {
-			employeeDAO.insert(employee);
+			employeeDAO.insertEmployee(employee);
 			return true;
 		}
 	}
 
-	public boolean updateService(Employee employee) {
-		if (employeeDAO.getById(employee.getEmployee_id()) != null) {
-			employeeDAO.update(employee);
+	public boolean updateEmployee(Employee employee) {
+		if (employeeDAO.getEmployeeById(employee.getEmployee_id()) != null) {
+			employeeDAO.updateEmployee(employee);
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public Employee getByIdService(int eId) {
-		return employeeDAO.getById(eId);
+	public Employee getEmployeeById(int eId) {
+		return employeeDAO.getEmployeeById(eId);
 	}
 
-	public boolean deleteService(int eId) {
-		if (employeeDAO.getById(eId) != null) {
-			employeeDAO.delete(eId);
+	public boolean deleteEmployee(int eId) {
+		if (employeeDAO.getEmployeeById(eId) != null) {
+			employeeDAO.deleteEmployee(eId);
 			return true;
 		} else {
 			return false;
@@ -49,13 +45,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public boolean approveService(int eId) {
-		if (employeeDAO.getById(eId) != null) {
-			employeeDAO.approve(eId);
+	public boolean approveEmployee(int eId) {
+		if (employeeDAO.getEmployeeById(eId) != null) {
+			employeeDAO.approveEmployee(eId);
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		return employeeDAO.getAllEmployees();
+	}
+
+	@Override
+	public List<Employee> listApprovedEmployees() {
+		return employeeDAO.listApprovedEmployees();
+	}
+
+	@Override
+	public List<Employee> listNotApprovedEmployees() {
+		return employeeDAO.listNotApprovedEmployees();
+	}
+
+	@Override
+	public List<Employee> searchEmployeesBySkill(String searchString) {
+		return employeeDAO.searchEmployeesBySkill(searchString);
 	}
 
 }

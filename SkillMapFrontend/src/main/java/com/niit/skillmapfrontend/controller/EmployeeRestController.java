@@ -27,9 +27,9 @@ public class EmployeeRestController {
 	private EmployeeService employeeService;
 
 	@PostMapping
-	public ResponseEntity<Employee> insert(@RequestBody Employee employee) {
+	public ResponseEntity<Employee> insertEmployee(@RequestBody Employee employee) {
 		
-		if (!employeeService.insertService(employee)) {
+		if (!employeeService.insertEmployee(employee)) {
 			return new ResponseEntity<Employee>(employee, HttpStatus.CONFLICT);
 		} else {
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
@@ -37,14 +37,22 @@ public class EmployeeRestController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Employee>> listAll() {
-		return new ResponseEntity<List<Employee>>(employeeService.getAllService(), HttpStatus.CREATED);
+	public ResponseEntity<List<Employee>> getAllEmployees() {
+		return new ResponseEntity<List<Employee>>(employeeService.getAllEmployees(), HttpStatus.CREATED);
+	}
+	@GetMapping
+	public ResponseEntity<List<Employee>> listApprovedEmployees() {
+		return new ResponseEntity<List<Employee>>(employeeService.listApprovedEmployees(), HttpStatus.CREATED);
+	}
+	@GetMapping
+	public ResponseEntity<List<Employee>> listNotApprovedEmployees() {
+		return new ResponseEntity<List<Employee>>(employeeService.listNotApprovedEmployees(), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{empId}")
 	public ResponseEntity<Employee> removeEmployee(@PathVariable("eid") int id) {
 
-		Employee employee = employeeService.getByIdService(id);
+		Employee employee = employeeService.getEmployeeById(id);
 
 		if (employee == null) {
 			return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
@@ -55,7 +63,7 @@ public class EmployeeRestController {
 	@PutMapping
 	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
 		
-		if (!employeeService.updateService(employee)) {
+		if (!employeeService.updateEmployee(employee)) {
 			return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
@@ -64,18 +72,23 @@ public class EmployeeRestController {
 	@GetMapping("approve/{empId}")
 	public ResponseEntity<Employee> approveEmployee(@PathVariable("eid") int eid) {
 
-		if (!employeeService.approveService(eid)) {
+		if (!employeeService.approveEmployee(eid)) {
 			return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
 		}
-		Employee employee = employeeService.getByIdService(eid);
+		Employee employee = employeeService.getEmployeeById(eid);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+	@GetMapping("search/{searchString}")
+	public ResponseEntity<List<Employee>> searchEmployeeBySkill(@PathVariable("searchString") String searchString) {
+
+		return new ResponseEntity<List<Employee>>(employeeService.searchEmployeesBySkill(searchString), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{empId}")
-	public ResponseEntity<Employee> getEmployee(@PathVariable("eid") int eid) {
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable("eid") int eid) {
 		
-		if(employeeService.getByIdService(eid)!=null) {
-			return new ResponseEntity<Employee>(employeeService.getByIdService(eid), HttpStatus.OK);
+		if(employeeService.getEmployeeById(eid)!=null) {
+			return new ResponseEntity<Employee>(employeeService.getEmployeeById(eid), HttpStatus.OK);
 		}
 		else 
 			return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND); 

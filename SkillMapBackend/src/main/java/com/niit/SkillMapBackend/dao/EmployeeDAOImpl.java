@@ -16,7 +16,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Employee> getAllEmployee() {
+	public List<Employee> getAllEmployees() {
 		return sessionFactory.getCurrentSession().createQuery("from Employee").list();
 	}
 
@@ -36,7 +36,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	public boolean deleteEmployee(int eId) {
-		sessionFactory.getCurrentSession().delete(getById(eId));
+		sessionFactory.getCurrentSession().delete(getEmployeeById(eId));
 		return true;
 
 	}
@@ -44,6 +44,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	{
 		  sessionFactory.getCurrentSession().createQuery("update Employee set status=true where employee_id=" + eId);
 		  return true;
+	}
+
+	@Override
+	public List<Employee> listApprovedEmployees() {
+		return sessionFactory.getCurrentSession().createQuery("from Employee where status = true").list();
+	}
+
+	@Override
+	public List<Employee> listNotApprovedEmployees() {
+		return sessionFactory.getCurrentSession().createQuery("from Employee where status = false").list();
+	}
+
+	@Override
+	public List<Employee> searchEmployeesBySkill(String searchString) {
+		return sessionFactory.getCurrentSession().createQuery("from Employee where skills like '"+searchString+"%' or skills like '%"+searchString+"' or certifications like '"+searchString+"%'").list();
 	}
 
 }
