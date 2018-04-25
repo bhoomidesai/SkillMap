@@ -1,0 +1,33 @@
+<div class="panel-body fixed-panel">
+  <h2>Registarion form</h2>
+<div>
+  <label class="control-label">ID:
+    <input #employeeID type="number" placeholder="Employee ID" class="form-control" required/>
+  </label>
+</div>
+
+<div>
+  <label class="control-label">name:
+      <input #employeeName placeholder="name" class="form-control" required/>
+  </label>
+</div>
+
+<div>
+  <label class="control-label">Email:
+      <input #employeeEmail type="email" placeholder="email" class="form-control" required/>
+  </label>
+</div>
+
+<div>
+  <label class="control-label">Password:
+      <input #employeePassword type="password" placeholder="password"  class="form-control" required/>
+  </label>
+</div>
+
+<button (click)="goBack()" class="button btn-default">go back</button>
+<button (click)="add(employeeID.value, employeeName.value, employeeEmail.value, 
+employeePassword.value); employeeID.value=0;employeeName.value=''; employeeEmail.value=''; 
+employeePassword.value=''" class="button btn-success">
+    Register
+</button>
+</div>

@@ -1,0 +1,26 @@
+
+<div class="panel-body fixed-panel" *ngIf="employee">
+    <h2>Update form</h2>
+  <div class="control-label">
+      <label>name:
+        <input [(ngModel)]="employee.employee_id" placeholder="name" class="form-control" readonly/>
+      </label>
+    </div>
+  <div>
+    <label class="control-label">name:
+      <input [(ngModel)]="employee.employee_name" placeholder="name" class="form-control" required/>
+    </label>
+  </div>
+  <div>
+    <label class="control-label">Email:
+      <input [(ngModel)]="employee.employee_email" placeholder="email" class="form-control" required/>
+    </label>
+  </div>
+  <div>
+    <label class="control-label">Password:
+      <input [(ngModel)]="employee.password" type="password" placeholder="password" class="form-control" required/>
+    </label>
+  </div>
+  <button (click)="goBack()" class="button btn-default">go back</button>
+  <button (click)="save()" class="button btn-success">save</button>
+</div>

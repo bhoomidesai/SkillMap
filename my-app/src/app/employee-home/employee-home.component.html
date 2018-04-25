@@ -1,0 +1,22 @@
+<div class="table-responsive"> 
+<h2>List of employees</h2>
+<table class="table">
+  <tr>
+    <th>Employee Id</th>
+    <th>Employee Name</th>
+    <th>Employee Email</th>
+    <th>Employee status</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  <tr *ngFor="let employee of employees">
+    <td> {{employee.employee_id}} </td>
+    <td> {{employee.employee_name}} </td>
+    <td> {{employee.employee_email}} </td>
+    <td> {{employee.password}} </td>
+    <td><a routerLink="/update/{{employee.employee_id}}" class="button btn-success">Update</a></td>
+    <td><button class="button btn-danger" title="Delete Employee"
+      (click)="delete(employee)">Delete</button></td>
+  </tr>
+</table>
+</div>
