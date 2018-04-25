@@ -53,11 +53,11 @@ public class EmployeeRestController {
 	@DeleteMapping("/{eid}")
 	public ResponseEntity<Employee> removeEmployee(@PathVariable("eid") int id) {
 
-		Employee employee = employeeService.getEmployeeById(id);
-
-		if (employee == null) {
+		if (!employeeService.deleteEmployee(id)) {
 			return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
 		}
+		Employee employee = employeeService.getEmployeeById(id);
+
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 

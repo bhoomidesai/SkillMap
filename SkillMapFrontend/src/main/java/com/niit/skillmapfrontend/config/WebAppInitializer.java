@@ -2,7 +2,7 @@ package com.niit.skillmapfrontend.config;
 
 
 import javax.servlet.Filter;
-
+import javax.servlet.ServletRegistration;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -28,5 +28,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	}
 	public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
+    }
+	@Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+      registration.setInitParameter("dispatchOptionsRequest", "true");
+      registration.setAsyncSupported(true);
     }
 }
